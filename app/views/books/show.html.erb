@@ -1,3 +1,9 @@
+<div class="text-success">
+  <%= flash[:notice] %>
+</div>
+<div class="text-danger">
+  <%= flash[:alret] %>
+</div>
 <p>
 <strong>Title:</strong>
 <%= @book.title %>
@@ -6,6 +12,7 @@
 <strong>Body:</strong>
 <%= @book.body %>
 </p>
-<a class="edit" href="/books/edit">edit</a>
+
+<%= link_to "Edit", edit_book_path(@book.id) %>
 |
-<a class="back" href="/books">Back</a>
+<%= link_to "Back", books_path %>
