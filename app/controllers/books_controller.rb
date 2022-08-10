@@ -4,13 +4,13 @@ class BooksController < ApplicationController
   end
 
   def create
+    @books=Book.all
     @book=Book.new(book_params)
     if @book.save
-     flash[:notice]="Book was successfully created"
+     flash[:notice]="Book Was Successfully Created"
      redirect_to book_path(@book.id)
     else
-     flash[:alret]="Book was not created"
-     @books=Book.all
+     flash.now[:alert]="Error"
      render :index
     end
   end
@@ -29,25 +29,22 @@ class BooksController < ApplicationController
   end
 
   def destroy
-    book= Book.find(params[:id])
-    Book.destroyd(book_params)
-    book.destroy
-    if @book.save
-     redirect_to book_path(@book.id)
-    else
-     flash.now="Book Was Successfully Destroyd"
-     render :edit
+    @book= Book.find(params[:id])
+    if @book.destroy
+     flash[:notice]="Book Was Successfully Destroyd"
+     redirect_to books_path
     end
   end
 
   def update
-    book= Book.find(params[:id])
-    book.update(book_params)
+    @book= Book.find(params[:id])
+    @book.update(book_params)
     if @book.save
-     redirect_to edit_book_path(book.id)
+     flash[:notice]="Book Was Successfully Updated"
+     redirect_to book_path(@book.id)
     else
-     flash.now="Book Was Successfully Updated"
-     render :edit
+     flash.now[:alert]="Error"
+     render :show
     end
   end
 
@@ -56,5 +53,4 @@ class BooksController < ApplicationController
   def book_params
     params.require(:book).permit(:title, :body)
   end
-
 end

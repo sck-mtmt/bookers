@@ -1,10 +1,6 @@
-<h1>Editing</h1>
-<div class="text-success">
   <%= flash[:notice] %>
-</div>
-<div class="text-danger">
   <%= flash[:alret] %>
-</div>
+<h1>Editing</h1>
 <%= form_with model: @book,url:book_path(@book.id),method: :patch do |f| %>
 
 <div class="field">
